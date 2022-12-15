@@ -1,17 +1,10 @@
 <?php
 class Usuario extends Crud {
-    private $id, $nombre, $apellido, $sexo, $direccion, $telefono, $edad, $conexion;
+    private $id, $nombre, $apellido, $sexo, $direccion, $telefono, $conexion;
     const TABLA = "usuarios";
-    function __construct($id, $nombre, $apellido, $sexo, $direccion, $telefono, $edad){
+    function __construct(){
         parent::__construct(self::TABLA);
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->sexo = $sexo;
-        $this->direccion = $direccion;
-        $this->telefono = $telefono;
-        $this->edad = $edad;
-        // $this->conexion = parent::__get(conexion);
+        $this->conexion = parent::realizaConexion();
     }
     function __get($variable){
         return $this->$variable;
