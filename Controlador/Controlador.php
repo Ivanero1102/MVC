@@ -9,8 +9,10 @@ $usuario = new Usuario();
 $animal = new Animal();
 $adopcion = new Adopcion();
 
-    if (isset($_POST["Crear"])and isset($_POST["Animal"])) {
-
+//Crear
+if(isset($_POST["Crear"])){
+    //Crear Animal
+    if (isset($_POST["Animal"])) {
         // Recibir los datos del formulario
         $animal->__set("id", $_POST['id']);
         $animal->__set("nombre", $_POST['nombre']);
@@ -25,8 +27,8 @@ $adopcion = new Adopcion();
         header("Location:index.php?msj=$msj");
     }
 
-    if (isset($_POST["Crear"])and isset($_POST["Usuario"])) {
-
+    //Crear usuario
+    if (isset($_POST["Usuario"])) {
         // Obtenga los datos del formulario
         $usuario->__set("id", $_POST['id']);
         $usuario->__set("nombre", $_POST['nombre']);
@@ -40,8 +42,8 @@ $adopcion = new Adopcion();
         header("Location:index.php?msj=$msj");
     }
     
-    if (isset($_POST["Crear"])and isset($_POST["Adopcion"])) {
-
+    //Crear adopcion
+    if (isset($_POST["Adopcion"])) {
         // Obtenga los datos del formulario
         $adopcion->__set("id", $_POST['id']);
         $adopcion->__set("idAnimal", $_POST['idAnimal']);
@@ -53,4 +55,5 @@ $adopcion = new Adopcion();
         $msj = "Se ha creado la adopcion ";
         header("Location:index.php?msj=$msj");
     }
+}
 ?>
