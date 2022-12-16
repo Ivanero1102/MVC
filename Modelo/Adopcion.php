@@ -17,7 +17,7 @@ class Adopcion extends Crud {
         try{ $sql = "INSERT INTO" .self::TABLA." (id, idAnimal, idUsuario, fecha,razon,)" .
             "VALUES (?,?,?,?,?)";
         
-        $stmt = $conn->prepare($sql);
+        $stmt = $this->conexion->prepare($sql);
         $stmt->bindParam(1, $this->id);
         $stmt->bindParam(2, $this->idAnimal);
         $stmt->bindParam(3, $this->idUsuario);
@@ -46,7 +46,7 @@ class Adopcion extends Crud {
                 ,created_at=?
                 ,updated_atCredito=?;";
         
-                $stmt = $conn->prepare($sql);
+                $stmt = $this->conexion->prepare($sql);
                 $stmt->bindParam(1, $this->id);
                 $stmt->bindParam(2, $this->idAnimal);
                 $stmt->bindParam(3, $this->idusuario);

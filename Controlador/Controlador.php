@@ -3,7 +3,7 @@ include "Conexion.php";
 include "Crud.php";
 include "Animales.php";
 include "Usuario.php";
-include "adopciones.php";
+include "Adopciones.php";
 
 $usuario = new Usuario();
 $animal = new Animal();

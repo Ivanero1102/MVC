@@ -19,7 +19,7 @@ class Animal extends Crud {
             color,edad)" .
                     "VALUES (?,?,?,?,?,?,?)";
                 
-                $stmt = $conn->prepare($sql);
+                $stmt = $this->conexion->prepare($sql);
                 $stmt->bindParam(1, $this->id);
                 $stmt->bindParam(2, $this->nombre);
                 $stmt->bindParam(3, $this->especie);
@@ -48,7 +48,7 @@ class Animal extends Crud {
                 ,edad=?
                 WHERE id=?";
         
-                $stmt = $conn->prepare($sql);
+                $stmt = $this->conexion->prepare($sql);
                 $stmt->bindParam(1, $this->id);
                 $stmt->bindParam(2, $this->nombre);
                 $stmt->bindParam(3, $this->especie);

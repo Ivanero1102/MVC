@@ -18,7 +18,7 @@ class Usuario extends Crud {
         telefono)" .
                 "VALUES (?,?,?,?,?,?)";
             
-            $stmt = $conn->prepare($sql);
+            $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(1, $this->id);
             $stmt->bindParam(2, $this->nombre);
             $stmt->bindParam(3, $this->apellido);
@@ -46,7 +46,7 @@ class Usuario extends Crud {
             ,telefono=?
             WHERE id=?";
         
-            $stmt = $conn->prepare($sql);
+            $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(1, $this->id);
             $stmt->bindParam(2, $this->nombre);
             $stmt->bindParam(3, $this->apellido);
