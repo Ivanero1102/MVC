@@ -128,7 +128,8 @@ function editar(){
     }
     }
 
-    function borrar(){
+    //borrado
+    function borrardo(){
 
         if(isset($_POST["borrar"])){
             $tabla= $_REQUEST['Tabla'];
