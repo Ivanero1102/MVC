@@ -130,6 +130,7 @@ function editar(){
 
     //borrado
     function borrardo(){
+        
 
         if(isset($_POST["borrar"])){
             $tabla= $_REQUEST['Tabla'];
