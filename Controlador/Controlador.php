@@ -131,12 +131,12 @@ function editar(){
     //borrado
     function borrardo(){
         
-
         if(isset($_POST["borrar"])){
             $tabla= $_REQUEST['Tabla'];
             $id=$_POST['id'];
             $this->tabla->borrar($id);
-           
+            $msj = "Se ha borrado ".$tabla." con id: ".$id;
+            header("Location:index.php?msj=$msj");
         }
 
        
