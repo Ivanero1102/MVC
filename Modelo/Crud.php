@@ -23,18 +23,23 @@
             return $stmt->fetch(PDO::FETCH_OBJ);
         }
     
-        function borrar(){
+        function borrar($id){
         
-         
+            $sql = "DELETE  FROM $this->tabla WHERE id= ? ;";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(1,$id);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
 
                 // $sql = "SELECT COUNT(*) AS 'id_cliente' FROM CLIENTE WHERE CLIENTE_ID ='" . $_POST['id_clienteB'] . "';";
-                // $result = $conn->query($sql);
+                // $result = $this->->query($sql);
                 // $borrar = $result->fetch();
         
                 // if ($borrar['id_cliente'] > 0) {
-                //     $sql = "DELETE FROM CLIENTE WHERE CLIENTE_ID=:idb;";
-                //     $stmt = $conn->prepare($sql);
-                //     $stmt->bindParam(':idb', $_POST['id_clienteB']);
+                //     $sql = "DELETE  FROM $this->tabla WHERE id= ? ;";
+                //     $stmt = $this->conexion->prepare($sql);
+                //     $stmt->bindParam(1,$id);
                 //     $stmt->execute();
                 //     $registros = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -45,6 +50,7 @@
                 // }
     
         }
+    
     
         abstract function crear();
         abstract function actualizar();

@@ -48,7 +48,7 @@ function crear(){
         }
 
         //Crear usuario
-        if (isset($_POST["Tabla"])) {
+        if ($_POST["Tabla"]=="usuario") { 
             // Obtenga los datos del formulario
             $this->usuario->__set("id", $_POST['id']);
             $this->usuario->__set("nombre", $_POST['nombre']);
@@ -63,7 +63,7 @@ function crear(){
         }
         
         //Crear adopcion
-        if (isset($_POST["Tabla"])) {
+        if ($_POST["Tabla"]=="adopcion") { 
             // Obtenga los datos del formulario
             $this->adopcion->__set("id", $_POST['id']);
             $this->adopcion->__set("idAnimal", $_POST['idAnimal']);
@@ -82,7 +82,7 @@ function crear(){
 function editar(){
     if(isset($_POST["Editar"])){
         //Editar Animal
-        if (isset($_POST["Tabla"])) {
+        if ($_POST["Tabla"]=="Animal") { 
             // Recibir los datos del formulario
             $this->animal->__set("id", $_POST['id']);
             $this->animal->__set("nombre", $_POST['nombre']);
@@ -98,7 +98,7 @@ function editar(){
         }
 
         //Editar usuario
-        if (isset($_POST["Tabla"])) {
+        if ($_POST["Tabla"]=="usuario") { 
             // Obtenga los datos del formulario
             $this->usuario->__set("id", $_POST['id']);
             $this->usuario->__set("nombre", $_POST['nombre']);
@@ -113,7 +113,7 @@ function editar(){
         }
         
         //Editar adopcion
-        if (isset($_POST["Tabla"])) {
+        if ($_POST["Tabla"]=="adopcion") { 
             // Obtenga los datos del formulario
             $this->adopcion->__set("id", $_POST['id']);
             $this->adopcion->__set("idAnimal", $_POST['idAnimal']);
@@ -126,6 +126,18 @@ function editar(){
             header("Location:index.php?msj=$msj");
         }
     }
+    }
+
+    function borrar(){
+
+        if(isset($_POST["borrar"])){
+            $tabla= $_REQUEST['Tabla'];
+            $id=$_POST['id'];
+            $this->tabla->borrar($id);
+           
+        }
+
+       
     }
 }
 ?>
