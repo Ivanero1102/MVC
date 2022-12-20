@@ -28,6 +28,64 @@ function mostrar($tabla){
     return $mostrar;
 }
 
+//Formulario Insertar
+function formularioInsertar(){
+    ?>
+    <form action='' method='post'>
+    <?php
+    if ($_POST["Tabla"]=="Usuarios") {
+        $array= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
+    }else{
+        if ($_POST["Tabla"]=="Animales") {
+            $array = array(
+                "Id",
+                "Nombre",
+                "Especie",
+                "Raza",
+                "Genero",
+                "Color",
+                "Edad"
+            );
+        }else{
+            $array = array(
+                "Id",
+                "Id Usuario",
+                "Id Animal",
+                "Fecha",
+                "Razon"
+            );
+        }
+    }
+    for ($i=0; $i < count($array); $i++) { 
+        echo "<br>
+        <label for='".$i."'>".$array[$i].":</label>
+        <input type='text' name='".$i."'></br>";
+    }
+    ?>
+    </form>
+    <?php
+    // <form action='' method='post'>
+    //     <input type='hidden' name='pagina' value='3'></input>
+    //     <label for='añadir_departamento_id' required>Departamento id:</label>
+    //     <input type='number' name='añadir_departamento_id'></br>
+    //     <label for='añadir_nombre'>Nombre:</label>
+    //     <input type='text' name='añadir_nombre'></br>
+    //     <label for='id'>Ubicacion ID:</label>
+    //     <select name='añadir_ubicacion_id'>";
+    //     $sql= "SELECT * FROM UBICACION";
+    //     foreach ($conn->query($sql) as $row){
+    //         echo "<option value='". $row["Ubicacion_ID"] ."'>". $row["Ubicacion_ID"] ."</option>";
+    //     }
+    //     echo "</select></br>
+    //     <span><input type='submit' name='añadir_acabado' value='Añadir cliente'></span>
+    // </form>
+}
+
+//Formulario Editar
+function formularioEditar(){
+
+}
+
 //Crear
 function crear(){
     if(isset($_POST["Crear"])){
