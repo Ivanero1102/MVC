@@ -59,7 +59,6 @@
     //         }
     //     }
     // }
-    $controlador->formularioInsertar($tabla);
             ?>
 </body>
 </html>

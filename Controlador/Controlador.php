@@ -27,54 +27,80 @@ function mostrar($tabla){
         }
     return $mostrar;
 }
-
-//Formulario Insertar
-function formularioInsertar($tabla){
-    ?>
-    <form action='Index.php' method='post'>
-        <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
-    <?php
-    if ($tabla=="Usuarios") {
-        $arraySolicitud= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
-        $arrayTipo = array("number", "text", "text", "text", "text", "text");
-    }else{
-        if ($tabla=="Animales") {
-            $arraySolicitud = array("Id","Nombre","Especie","Raza","Genero","Color","Edad");
-            $arrayTipo = array("number", "text", "text", "text", "text", "text", "number");
+//Formularios
+function formulario($tabla){
+    //Formulario Insertar
+    if(isset($_POST['Enviar'])){
+        ?>
+        <form action='Index.php' method='post'>
+            <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
+        <?php
+        if ($tabla=="Usuarios") {
+            $arraySolicitud= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
+            $arrayTipo = array("number", "text", "text", "text", "text", "text");
         }else{
-            $arraySolicitud = array("Id","Id Usuario","Id Animal","Fecha","Razon");
-            $arrayTipo = array("number", "number", "number", "text", "text");
+            if ($tabla=="Animales") {
+                $arraySolicitud = array("Id","Nombre","Especie","Raza","Genero","Color","Edad");
+                $arrayTipo = array("number", "text", "text", "text", "text", "text", "number");
+            }else{
+                $arraySolicitud = array("Id","Id Usuario","Id Animal","Fecha","Razon");
+                $arrayTipo = array("number", "number", "number", "text", "text");
+            }
         }
+        for ($i=0; $i < count($arraySolicitud); $i++) { 
+            echo "<br>
+            <label for='".$i."'>".$arraySolicitud[$i].":</label>
+            <input type='".$arrayTipo[$i]."' name='".$i."'></br>";
+        }
+        ?>
+            <span><input type='submit' name='Añadir' value='Añadir'></span>
+        </form>
+        <?php
+        // <form action='' method='post'>
+        //     <input type='hidden' name='pagina' value='3'></input>
+        //     <label for='añadir_departamento_id' required>Departamento id:</label>
+        //     <input type='number' name='añadir_departamento_id'></br>
+        //     <label for='añadir_nombre'>Nombre:</label>
+        //     <input type='text' name='añadir_nombre'></br>
+        //     <label for='id'>Ubicacion ID:</label>
+        //     <select name='añadir_ubicacion_id'>";
+        //     $sql= "SELECT * FROM UBICACION";
+        //     foreach ($conn->query($sql) as $row){
+        //         echo "<option value='". $row["Ubicacion_ID"] ."'>". $row["Ubicacion_ID"] ."</option>";
+        //     }
+        //     echo "</select></br>
+        //     <span><input type='submit' name='añadir_acabado' value='Añadir cliente'></span>
+        // </form>
     }
-    for ($i=0; $i < count($arraySolicitud); $i++) { 
-        echo "<br>
-        <label for='".$i."'>".$arraySolicitud[$i].":</label>
-        <input type='".$arrayTipo[$i]."' name='".$i."'></br>";
+    
+    //Formulario Editar
+    if(isset($_POST['Editar'])){
+        ?>
+        <form action='Index.php' method='post'>
+            <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
+        <?php
+        if ($tabla=="Usuarios") {
+            $arraySolicitud= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
+            $arrayTipo = array("number", "text", "text", "text", "text", "text");
+        }else{
+            if ($tabla=="Animales") {
+                $arraySolicitud = array("Id","Nombre","Especie","Raza","Genero","Color","Edad");
+                $arrayTipo = array("number", "text", "text", "text", "text", "text", "number");
+            }else{
+                $arraySolicitud = array("Id","Id Usuario","Id Animal","Fecha","Razon");
+                $arrayTipo = array("number", "number", "number", "text", "text");
+            }
+        }
+        for ($i=0; $i < count($arraySolicitud); $i++) { 
+            echo "<br>
+            <label for='".$i."'>".$arraySolicitud[$i].":</label>
+            <input type='".$arrayTipo[$i]."' name='".$i."'></br>";
+        }
+        ?>
+            <span><input type='submit' name='Añadir' value='Añadir'></span>
+        </form>
+        <?php
     }
-    ?>
-        <span><input type='submit' name='Añadir' value='Añadir'></span>
-    </form>
-    <?php
-    // <form action='' method='post'>
-    //     <input type='hidden' name='pagina' value='3'></input>
-    //     <label for='añadir_departamento_id' required>Departamento id:</label>
-    //     <input type='number' name='añadir_departamento_id'></br>
-    //     <label for='añadir_nombre'>Nombre:</label>
-    //     <input type='text' name='añadir_nombre'></br>
-    //     <label for='id'>Ubicacion ID:</label>
-    //     <select name='añadir_ubicacion_id'>";
-    //     $sql= "SELECT * FROM UBICACION";
-    //     foreach ($conn->query($sql) as $row){
-    //         echo "<option value='". $row["Ubicacion_ID"] ."'>". $row["Ubicacion_ID"] ."</option>";
-    //     }
-    //     echo "</select></br>
-    //     <span><input type='submit' name='añadir_acabado' value='Añadir cliente'></span>
-    // </form>
-}
-
-//Formulario Editar
-function formularioEditar(){
-
 }
 
 //Crear
