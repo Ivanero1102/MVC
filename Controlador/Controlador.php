@@ -29,39 +29,30 @@ function mostrar($tabla){
 }
 
 //Formulario Insertar
-function formularioInsertar(){
+function formularioInsertar($tabla){
     ?>
-    <form action='' method='post'>
+    <form action='Index.php' method='post'>
+        <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
     <?php
-    if ($_POST["Tabla"]=="Usuarios") {
-        $array= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
+    if ($tabla=="Usuarios") {
+        $arraySolicitud= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
+        $arrayTipo = array("number", "text", "text", "text", "text", "text");
     }else{
-        if ($_POST["Tabla"]=="Animales") {
-            $array = array(
-                "Id",
-                "Nombre",
-                "Especie",
-                "Raza",
-                "Genero",
-                "Color",
-                "Edad"
-            );
+        if ($tabla=="Animales") {
+            $arraySolicitud = array("Id","Nombre","Especie","Raza","Genero","Color","Edad");
+            $arrayTipo = array("number", "text", "text", "text", "text", "text", "number");
         }else{
-            $array = array(
-                "Id",
-                "Id Usuario",
-                "Id Animal",
-                "Fecha",
-                "Razon"
-            );
+            $arraySolicitud = array("Id","Id Usuario","Id Animal","Fecha","Razon");
+            $arrayTipo = array("number", "number", "number", "text", "text");
         }
     }
-    for ($i=0; $i < count($array); $i++) { 
+    for ($i=0; $i < count($arraySolicitud); $i++) { 
         echo "<br>
-        <label for='".$i."'>".$array[$i].":</label>
-        <input type='text' name='".$i."'></br>";
+        <label for='".$i."'>".$arraySolicitud[$i].":</label>
+        <input type='".$arrayTipo[$i]."' name='".$i."'></br>";
     }
     ?>
+        <span><input type='submit' name='Añadir' value='Añadir'></span>
     </form>
     <?php
     // <form action='' method='post'>
@@ -87,18 +78,18 @@ function formularioEditar(){
 }
 
 //Crear
-function crear(){
+function crear($tabla){
     if(isset($_POST["Crear"])){
         //Crear Animal
-        if ($_POST["Tabla"]=="Animal") {
+        if ($tabla=="Animal") {
             // Recibir los datos del formulario
-            $this->animal->__set("id", $_POST['id']);
-            $this->animal->__set("nombre", $_POST['nombre']);
-            $this->animal->__set("especie", $_POST['especie']);
-            $this->animal->__set("raza", $_POST['raza']);
-            $this->animal->__set("genero", $_POST['genero']);
-            $this->animal->__set("color", $_POST['color']);
-            $this->animal->__set("edad", $_POST['edad']);
+            $this->animal->__set("id", $_POST[0]);
+            $this->animal->__set("nombre", $_POST[1]);
+            $this->animal->__set("especie", $_POST[2]);
+            $this->animal->__set("raza", $_POST[3]);
+            $this->animal->__set("genero", $_POST[4]);
+            $this->animal->__set("color", $_POST[5]);
+            $this->animal->__set("edad", $_POST[6]);
             // Crear un objeto con los datos del formulario
             $this->animal->crear();
             $msj = "Se ha creado el animal ";
@@ -106,14 +97,14 @@ function crear(){
         }
 
         //Crear usuario
-        if ($_POST["Tabla"]=="usuario") { 
+        if ($tabla=="usuario") { 
             // Obtenga los datos del formulario
-            $this->usuario->__set("id", $_POST['id']);
-            $this->usuario->__set("nombre", $_POST['nombre']);
-            $this->usuario->__set("apellido", $_POST['apellido']);
-            $this->usuario->__set("sexo", $_POST['sexo']);
-            $this->usuario->__set("direccion", $_POST['direccion']);
-            $this->usuario->__set("telefono", $_POST['telefono']);
+            $this->usuario->__set("id", $_POST[0]);
+            $this->usuario->__set("nombre", $_POST[1]);
+            $this->usuario->__set("apellido", $_POST[2]);
+            $this->usuario->__set("sexo", $_POST[3]);
+            $this->usuario->__set("direccion", $_POST[4]);
+            $this->usuario->__set("telefono", $_POST[5]);
             // Crear un objeto con los datos del formulario
             $this->usuario->crear();
             $msj = "Se ha creado el usuario ";
@@ -121,13 +112,13 @@ function crear(){
         }
         
         //Crear adopcion
-        if ($_POST["Tabla"]=="adopcion") { 
+        if ($tabla=="adopcion") { 
             // Obtenga los datos del formulario
-            $this->adopcion->__set("id", $_POST['id']);
-            $this->adopcion->__set("idAnimal", $_POST['idAnimal']);
-            $this->adopcion->__set("idUsuario", $_POST['idUsuario']);
-            $this->adopcion->__set("fecha", $_POST['fecha']);
-            $this->adopcion->__set("razon", $_POST['razon']);
+            $this->adopcion->__set("id", $_POST[0]);
+            $this->adopcion->__set("idAnimal", $_POST[1]);
+            $this->adopcion->__set("idUsuario", $_POST[2]);
+            $this->adopcion->__set("fecha", $_POST[3]);
+            $this->adopcion->__set("razon", $_POST[4]);
             // Crear un objeto con los datos del formulario
             $this->adopcion->crear();
             $msj = "Se ha creado la adopcion ";
@@ -137,18 +128,18 @@ function crear(){
 }
 
 //Editar
-function editar(){
+function editar($tabla){
     if(isset($_POST["Editar"])){
         //Editar Animal
-        if ($_POST["Tabla"]=="Animal") { 
+        if ($tabla=="Animal") { 
             // Recibir los datos del formulario
-            $this->animal->__set("id", $_POST['id']);
-            $this->animal->__set("nombre", $_POST['nombre']);
-            $this->animal->__set("especie", $_POST['especie']);
-            $this->animal->__set("raza", $_POST['raza']);
-            $this->animal->__set("genero", $_POST['genero']);
-            $this->animal->__set("color", $_POST['color']);
-            $this->animal->__set("edad", $_POST['edad']);
+            $this->animal->__set("id", $_POST[0]);
+            $this->animal->__set("nombre", $_POST[1]);
+            $this->animal->__set("especie", $_POST[2]);
+            $this->animal->__set("raza", $_POST[3]);
+            $this->animal->__set("genero", $_POST[4]);
+            $this->animal->__set("color", $_POST[5]);
+            $this->animal->__set("edad", $_POST[6]);
             // Editar un objeto con los datos del formulario
             $this->animal->actualizar();
             $msj = "Se ha editado el animal ";
@@ -156,14 +147,14 @@ function editar(){
         }
 
         //Editar usuario
-        if ($_POST["Tabla"]=="usuario") { 
+        if ($tabla=="usuario") { 
             // Obtenga los datos del formulario
-            $this->usuario->__set("id", $_POST['id']);
-            $this->usuario->__set("nombre", $_POST['nombre']);
-            $this->usuario->__set("apellido", $_POST['apellido']);
-            $this->usuario->__set("sexo", $_POST['sexo']);
-            $this->usuario->__set("direccion", $_POST['direccion']);
-            $this->usuario->__set("telefono", $_POST['telefono']);
+            $this->usuario->__set("id", $_POST[0]);
+            $this->usuario->__set("nombre", $_POST[1]);
+            $this->usuario->__set("apellido", $_POST[2]);
+            $this->usuario->__set("sexo", $_POST[3]);
+            $this->usuario->__set("direccion", $_POST[4]);
+            $this->usuario->__set("telefono", $_POST[5]);
             // Editar un objeto con los datos del formulario
             $this->usuario->actualizar();
             $msj = "Se ha editado el usuario ";
@@ -171,13 +162,13 @@ function editar(){
         }
         
         //Editar adopcion
-        if ($_POST["Tabla"]=="adopcion") { 
+        if ($tabla=="adopcion") { 
             // Obtenga los datos del formulario
-            $this->adopcion->__set("id", $_POST['id']);
-            $this->adopcion->__set("idAnimal", $_POST['idAnimal']);
-            $this->adopcion->__set("idUsuario", $_POST['idUsuario']);
-            $this->adopcion->__set("fecha", $_POST['fecha']);
-            $this->adopcion->__set("razon", $_POST['razon']);
+            $this->adopcion->__set("id", $_POST[0]);
+            $this->adopcion->__set("idAnimal", $_POST[1]);
+            $this->adopcion->__set("idUsuario", $_POST[2]);
+            $this->adopcion->__set("fecha", $_POST[3]);
+            $this->adopcion->__set("razon", $_POST[4]);
             // Editar un objeto con los datos del formulario
             $this->adopcion->actualizar();
             $msj = "Se ha editado la adopcion ";
@@ -186,10 +177,9 @@ function editar(){
     }
     }
 
-    function borrar(){
+    function borrar($tabla){
 
         if(isset($_POST["borrar"])){
-            $tabla= $_REQUEST['Tabla'];
             $id=$_POST['id'];
             $this->tabla->borrar($id);
            
