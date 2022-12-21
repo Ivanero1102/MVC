@@ -1,7 +1,7 @@
 <?php
 class Animal extends Crud {
     private $id, $nombre, $especie, $raza, $genero, $color, $edad;
-    const TABLA = "usuarios";
+    const TABLA = "animal";
     function __construct(){
         parent::__construct(self::TABLA);
         $this->conexion = parent::realizaConexion();

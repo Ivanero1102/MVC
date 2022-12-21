@@ -30,31 +30,59 @@ function mostrar($tabla){
 //Formularios
 function formulario($tabla){
     //Formulario Insertar
-    if(isset($_POST['Enviar'])){
+    if(isset($_POST['Añadir'])){
         ?>
         <form action='Index.php' method='post'>
             <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
         <?php
         if ($tabla=="Usuarios") {
-            $arraySolicitud= array("Id","Nombre","Apellido","Sexo","Direccion", "Telefono");
-            $arrayTipo = array("number", "text", "text", "text", "text", "text");
+            $arraySolicitud= array("Nombre","Apellido","Sexo","Direccion", "Telefono");
+            $arrayTipo = array("text", "text", "text", "text", "text");
+            $arrayLimite = array(200, 200, 9, 200, 15);
         }else{
             if ($tabla=="Animales") {
-                $arraySolicitud = array("Id","Nombre","Especie","Raza","Genero","Color","Edad");
-                $arrayTipo = array("number", "text", "text", "text", "text", "text", "number");
+                $arraySolicitud = array("Nombre","Especie","Raza","Genero","Color","Edad");
+                $arrayTipo = array("text", "text", "text", "text", "text", "number");
+                $arrayLimite = array(200, 50, 50, 6, 50, 99999999999);
             }else{
-                $arraySolicitud = array("Id","Id Usuario","Id Animal","Fecha","Razon");
-                $arrayTipo = array("number", "number", "number", "text", "text");
+                $arraySolicitud = array("Id Usuario","Id Animal","Fecha","Razon");
+                $arrayTipo = array("number", "number", "text", "text");
             }
         }
         for ($i=0; $i < count($arraySolicitud); $i++) { 
-            echo "<br>
-            <label for='".$i."'>".$arraySolicitud[$i].":</label>
-            <input type='".$arrayTipo[$i]."' name='".$i."'></br>";
+         if($tabla=="Adopciones"){
+            ?><label for='<?php echo $i ?>'><?php echo $arraySolicitud[$i] ?>:</label><?php
+            if($arrayTipo[$i] != "number"){
+                ?>
+            <input type='<?php echo $arrayTipo[$i] ?>' name='<?php echo $i ?>'><br><?php
+            }else{
+                if($i == 0){
+                    ?> <select name='<?php echo $i ?>'> <?php
+                    for ($e=0; $e < count($this->usuario->obtieneTodos()); $e++) {
+                        ?> <option value='<?php $this->usuario->obtieneTodos()[$e]->id ?>'><?php echo $this->usuario->obtieneTodos()[$e]->id ?></option><?php 
+                    }
+                    ?></select></br><?php
+                }else{
+                    ?>
+                    <select name='<?php echo $i ?>'> <?php
+                    for ($e=0; $e < count($this->animal->obtieneTodos()); $e++) { 
+                        ?> <option value='<?php $this->animal->obtieneTodos()[$e]->id ?>'><?php echo $this->animal->obtieneTodos()[$e]->id ?></option><?php
+                    }
+                    ?></select></br><?php
+                }
+            }
+        }else{
+            ?>
+            <label for='<?php echo $i ?>'><?php echo $arraySolicitud[$i] ?>:</label>
+            <input type='<?php echo $arrayTipo[$i] ?>' 
+            <?php if ($arrayTipo[$i] != "number") {
+                ?> maxlength ='<?php echo $arrayLimite[$i]?>'<?php
+            }else{
+                ?>max ='<?php echo $arrayLimite[$i]?>'<?php }?>
+                  name='<?php echo $i ?>' required><br>
+            <?php
         }
         ?>
-            <span><input type='submit' name='Añadir' value='Añadir'></span>
-        </form>
         <?php
         // <form action='' method='post'>
         //     <input type='hidden' name='pagina' value='3'></input>
@@ -72,7 +100,15 @@ function formulario($tabla){
         //     <span><input type='submit' name='añadir_acabado' value='Añadir cliente'></span>
         // </form>
     }
-    
+    ?>
+    <span><input type='submit' name='Añadir' value='Añadir'></span>
+        </form>
+    <form action='Index.php' method='post'>
+        <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
+        <span><input type='submit' name='Volver' value='Volver'></span>
+        </form>
+        <?php
+}
     //Formulario Editar
     if(isset($_POST['Editar'])){
         ?>
@@ -97,7 +133,11 @@ function formulario($tabla){
             <input type='".$arrayTipo[$i]."' name='".$i."'></br>";
         }
         ?>
-            <span><input type='submit' name='Añadir' value='Añadir'></span>
+            <span><input type='submit' name='Editar' value='Editar'></span>
+        </form>
+        <form action='Index.php' method='post'>
+        <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
+        <span><input type='submit' name='Volver' value='Volver'></span>
         </form>
         <?php
     }

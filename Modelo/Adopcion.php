@@ -1,7 +1,7 @@
 <?php
 class Adopcion extends Crud {
     private $id, $idAnimal, $idUsuario, $fecha, $razon, $conexion;
-    const TABLA = "usuarios";
+    const TABLA = "adopcion";
     function __construct(){
         parent::__construct(self::TABLA);
         $this->conexion = parent::realizaConexion();

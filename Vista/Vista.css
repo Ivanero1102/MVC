@@ -58,7 +58,8 @@ img{
 }
 
 .active {
-    background-color: rgba(36, 255, 62, 0.847);
+    /* background-color: rgba(36, 255, 62, 0.847); */
+    background-color: rgba(255, 197, 36, 0.847);
 }
 
 th, td{
@@ -77,3 +78,7 @@ table{
     margin: 0 auto;
     /* color: white; */
 }
+
+/* form{
+    color: white;
+} */

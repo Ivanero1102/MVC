@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="Vista.css"/>
-    <script src="Vista.js" defer></script>
+    <script language= javascript type= text/javascript src="./Vista.js" refer></script>
     <title>Document</title>
 </head>
 <body>
@@ -22,22 +22,33 @@
             $tabla = "Usuarios";
         }
     ?>
-    </script>
     <div class='menu'>
-        <form action='' method='post'>
-            <input type='hidden' name='Mostrar'></input>
+        <form action='Index.php' method='post'>
             <p><input class='active' type='submit' name='Tabla' value='Usuarios'></p>
         </form>
-        <form action='' method='post'> 
-            <input type='hidden' name='Mostrar'></input>
+        <form action='Index.php' method='post'> 
             <p><input class='cell_menu' type='submit' name='Tabla' value='Animales'></p>
         </form>
-        <form action='' method='post'>
-            <input type='hidden' name='Mostrar'></input>
+        <form action='Index.php' method='post'>
             <p><input class='cell_menu' type='submit' name='Tabla' value='Adopciones'></p>
         </form>
     </div>
     <?php
+    if($tabla == "Animales"){
+        echo "<script>";
+        echo "cambiaClase(1);";
+        echo "</script>";
+    }else{
+        if($tabla == "Adopciones"){
+            echo "<script>";
+            echo "cambiaClase(2);";
+            echo "</script>";
+        }else{
+            echo "<script>";
+            echo "cambiaClase(0);";
+            echo "</script>";
+        }
+    }
     // if(isset($_REQUEST["Mostrar"])){
     //     if($tabla == "Usuarios"){
     //         $mostrar = $controlador->mostrar("Usuarios");
@@ -59,6 +70,14 @@
     //         }
     //     }
     // }
+    
+    if (isset($_REQUEST['alerta'])){
+        echo $_REQUEST['alerta'];
+    }
             ?>
+        <form action='EditarYCrear.php' method='post'>
+        <input type='hidden' name='Tabla' value='<?php echo $tabla ?>'></input>
+        <span><input type='submit' name='Añadir' value='Formu-Pruebas'></span>
+        </form>
 </body>
 </html>
